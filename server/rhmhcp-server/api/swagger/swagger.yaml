@@ -1,0 +1,140 @@
+swagger: '2.0'
+info:
+  version: 0.1.0
+  title: RHMHCP
+  description: Red Hat Mobile Hot Code Push API
+  contact:
+    name: Keyang Xiang
+    email: kxiang@redhat.com 
+  license:
+    name: MIT
+    url: http://opensource.org/licenses/MIT
+host: localhost:10010
+basePath: "/v1"
+schemes:
+  - http
+  - https
+produces: 
+  - application/json
+  - text/plain
+consumes: 
+  - application/json
+paths:
+  /project:
+    x-swagger-router-controller: "project"
+    get:
+      tags: 
+        - "Project"
+      summary: List all projects
+      operationId: "listProjects"
+      responses:
+         200:
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Project"
+          description: OK
+    post:
+      tags:
+        - "Project"
+      summary: Create a project
+      operationId: "createProject"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "The project to be created"
+          required: true
+          schema:
+            $ref: '#/definitions/Project'
+      produces:
+        - text/plain
+      responses:
+        405:
+          description: "Invalid Input"
+  
+  /project/{projectId}:
+    x-swagger-router-controller: "project"
+    delete:
+      operationId: "deleteProject"
+      produces: 
+      - "text/plain"
+      tags:
+        - "Project"
+      parameters:
+      - name: "projectId"
+        in: path
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: OK
+          
+  
+definitions:
+  Project:
+    type: "object"
+    required: 
+      - "name"
+      - "type"
+    additionalProperties: false
+    properties:
+      _id:
+        type: "string"
+      name:
+        type: "string"
+        description: "Name of the project"
+      type:
+        type: "string"
+        description: "Type of the project"
+        enum: 
+          - cordova
+      deploymentTarget:
+        type: "object"
+        description: "Deployment target configuration"
+        properties:
+          uri:
+            type: "string"
+            description: "Place to retrieve app code"
+          params:
+            type: "object"
+            description: "Parameters"
+        
+        
+          
+  DeploymentTarget_RHMAP:
+    type: "object"
+    description: "RHMAP deployment target"
+    required:
+      - "target"
+      - "username"
+      - "password"
+      - "hostApp"
+    additionalProperties: false
+    properties:
+      target:
+        type: "string"
+        description: "the target url of RHMAP"
+        example: "https://psdev.us.evals.redhatmobile.com"
+      username:
+        type: "string"
+        description: "User name / email address used to login"
+      password:
+        type: "string"
+        description: "Password used to login"
+      hostApp:
+        type: "object"
+        description: "Host app configuration"
+        required: 
+          - "gitUrl"
+          - "webUrl"
+        properties:
+          gitUrl:
+            type: "string"
+            description: "Host app git url. This is where the code push happens."
+          gitKey:
+            type: "string"
+            description: "Private key to be able to push git. If not set, will attempt to use username / password set"
+          webUrl: 
+            type: "string"
+            description: "Url for client to download assets"
+      

@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+
+var prom=require("commander");
+
+prom.version(require("../package.json").version);
+prom.command("init","Init a hot code push project.");
+prom.command("publish","Publish current project.");
+
+prom.parse(process.argv);
+

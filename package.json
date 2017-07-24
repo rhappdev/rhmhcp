@@ -1,0 +1,24 @@
+{
+  "name": "rhmhcp",
+  "version": "1.0.0",
+  "description": "RedHat Mobile Hot Code Push solution",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redhat-mobile-consulting/rhmhcp.git"
+  },
+  "keywords": [
+    "hot",
+    "code",
+    "push"
+  ],
+  "author": "Keyang Xiang <keyang.xiang@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/redhat-mobile-consulting/rhmhcp/issues"
+  },
+  "homepage": "https://github.com/redhat-mobile-consulting/rhmhcp#readme"
+}

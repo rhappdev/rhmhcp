@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+var prom = require("commander");
+
+prom
+  .arguments("<server_url>")
+  .action(function (server_url) {
+    prom.server_url = server_url;
+  })
+  .option("-t, --type <type>", "Type of mobile project. Default: cordova", "cordova")
+  .option("--cordova-exec <cordovaExec>", "Path to cordova executable. default is cordova ", "cordova")
+
+prom.parse(process.argv);
+if (!prom.server_url) {
+  console.error("Please specify server url.");
+  prom.outputHelp();
+} else {
+  // console.log(prom);
+  require("../lib/init")(prom);
+
+}
