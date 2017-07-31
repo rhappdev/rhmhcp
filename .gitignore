@@ -1,3 +1,5 @@
 node_modules
 testCordova
 .vscode
+*.log
+.DS_Store

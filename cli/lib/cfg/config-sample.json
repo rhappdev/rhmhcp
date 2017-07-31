@@ -1,0 +1,8 @@
+{
+  "create-date": "ISO Date",
+  "cordova": {
+    "cmd": "./node_modules/.bin/cordova"
+  },
+  "type": "cordova",
+  "rhm-hcp-version": "0.1.0"
+}

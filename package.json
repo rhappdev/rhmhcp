@@ -1,7 +1,7 @@
 {
   "name": "rhmhcp",
   "version": "1.0.0",
-  "description": "RedHat Mobile Hot Code Push solution",
+  "description": "Red Hat Mobile Hot Code Push solution",
   "main": "index.js",
   "scripts": {
     "test": "npm test"
@@ -20,5 +20,14 @@
   "bugs": {
     "url": "https://github.com/redhat-mobile-consulting/rhmhcp/issues"
   },
-  "homepage": "https://github.com/redhat-mobile-consulting/rhmhcp#readme"
+  "homepage": "https://github.com/redhat-mobile-consulting/rhmhcp#readme",
+  "engines": {
+    "node": ">=4.4.3"
+  },
+  "dependencies": {
+
+  },
+  "devDependencies": {
+    "eslint": "~4.3.0"
+  }
 }

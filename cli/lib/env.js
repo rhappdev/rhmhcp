@@ -1,7 +1,7 @@
 exports.get = get;
 exports.set = set;
 var def = {
-  "configFile": "rhmhcp.json"
+  "RHM_HCP_CFG": "rhmhcp.json"
 };
 
 var dynamic = {

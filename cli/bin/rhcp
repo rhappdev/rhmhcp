@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-var prom=require("commander");
+const prom = require("commander");
 
 prom.version(require("../package.json").version);
-prom.command("init","Init a hot code push project.");
+prom.command("init", "Initialise hot code push for the project in the current directory");
 prom.command("publish","Publish current project.");
 
 prom.parse(process.argv);

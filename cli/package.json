@@ -1,7 +1,7 @@
 {
   "name": "rhmhcp-cli",
-  "version": "1.0.0",
-  "description": "RedHat Mobile Hot Code Push Command Line",
+  "version": "0.1.0",
+  "description": "Red Hat Mobile Hot Code Push Command Line",
   "main": "index.js",
   "scripts": {
     "test": "npm test"
@@ -9,16 +9,21 @@
   "author": "Keyang Xiang <keyang.xiang@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "bluebird": "^3.5.0",
-    "commander": "^2.11.0",
-    "cordova-hot-code-push-cli": "^1.1.1",
-    "lodash": "^4.17.4",
-    "winston": "^2.3.1"
+    "bluebird": "~3.5.0",
+    "commander": "~2.11.0",
+    "cordova-hot-code-push-cli": "~1.1.1",
+    "debug": "~2.6.8",
+    "inquirer": "~3.2.1",
+    "lodash": "~4.17.4",
+    "spawn-rx": "~2.0.11",
+    "valid-url": "~1.0.9",
+    "winston": "~2.3.1"
   },
   "bin": {
     "rhcp": "./bin/rhcp"
   },
   "devDependencies": {
-    "mocha": "^3.4.2"
+    "eslint": "~4.3.0",
+    "mocha": "~3.4.2"
   }
 }
