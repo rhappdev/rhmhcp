@@ -1,6 +1,5 @@
 'use strict';
 
-const util = require('./util');
 const cfg = require('../../cfg');
 const log = require('../../log');
 const inquirer = require('inquirer');
@@ -8,6 +7,9 @@ const mkdirSync = require('mkdirp').sync;
 const fs = require('fs');
 const join = require('path').join;
 const et = require('elementtree');
+const Promise = require('bluebird');
+const spawnPromise = require('spawn-rx').spawnPromise;
+
 
 /**
  * Locations that a user can specify to use for a cordova binary
@@ -18,9 +20,21 @@ const LOCATIONS = exports.LOCATIONS = ['local', 'global', 'custom'];
  * Initialise the current Cordova project with Red Hat Mobile Hot Code Push
  */
 exports.initialise = function () {
-  return util.installHcpPlugin()
+  return installHcpPlugin()
     .then(addHooks)
     .then(updateConfigXml);
+};
+
+/**
+ * Executes a Cordova command, e.g "platform add ios"
+ * @param   {Array<String>} args
+ * @return  {Promise<String>}
+ */
+const exec = exports.exec = function exec (args) {
+  log.debug('executing cordova command with args - %s', args.join(', '));
+  // Promise.resolve will create a Bluebird promise chain
+  return Promise.resolve()
+    .then(() => spawnPromise(resolveCordovaLocation(), args));
 };
 
 /**
@@ -50,6 +64,43 @@ exports.askQuestions = function () {
         return answers;
       }
     });
+};
+
+/**
+ * We might need to resolve strings such as "local" or "global" to an actual path
+ * @return {String}
+ */
+function resolveCordovaLocation () {
+  const loc = cfg.getCordovaLocation();
+
+  log.debug('resolving cordova binary location for command - %j', loc);
+
+  if (loc === 'global') {
+    log.debug('using global cordova');
+    return 'cordova';
+  } else if (loc === 'local') {
+    log.debug('using local cordova');
+    return join(process.cwd(), 'node_modules', '.bin', 'cordova');
+  } else {
+    log.debug('using custom cordova at %s', loc);
+    return loc;
+  }
+}
+
+/**
+ * Installs the hot code push plugin into this Cordova project.
+ * Defaults to the master branch version
+ * @param   {String} [version]
+ * @return  {Promise<String>}
+ */
+function installHcpPlugin (/* version */) { // TODO versioning
+  log.progress('installing hot code push cordova plugin');
+  return exec([
+    'plugin',
+    'add',
+    'cordova-hot-code-push-plugin',
+    '--save'
+  ]);
 };
 
 /**
