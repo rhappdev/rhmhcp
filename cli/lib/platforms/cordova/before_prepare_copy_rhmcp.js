@@ -12,6 +12,7 @@ module.exports = function (ctx) {
   const BASE_PATH = path.join(process.cwd(), 'rhmhcp.json');
   const DEST_PATH = path.join(process.cwd(), 'www', 'rhmhcp.json');
 
+  // TODO - copy some scripts?
   // Copy the latset rhmcp into www/ before preparing bundle
   fs.createReadStream(BASE_PATH)
     .pipe(fs.createWriteStream(DEST_PATH))

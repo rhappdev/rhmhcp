@@ -119,6 +119,15 @@ exports.getCordovaLocation = function () {
   return getKey('cordova.location', 'cordova');
 };
 
+
+/**
+ * Returns the server URL where hcp server is located
+ * @return {String}
+ */
+exports.getServerUrl = function () {
+  return getKey('serverUrl');
+};
+
 /**
  * Creates a new config for a project, saves it to disk, then returns it.
  * @param   {Object} args

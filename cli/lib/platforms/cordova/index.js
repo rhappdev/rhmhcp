@@ -1,11 +1,13 @@
 'use strict';
 
 const util = require('./util');
+const cfg = require('../../cfg');
 const log = require('../../log');
 const inquirer = require('inquirer');
 const mkdirSync = require('mkdirp').sync;
 const fs = require('fs');
 const join = require('path').join;
+const et = require('elementtree');
 
 /**
  * Locations that a user can specify to use for a cordova binary
@@ -17,7 +19,8 @@ const LOCATIONS = exports.LOCATIONS = ['local', 'global', 'custom'];
  */
 exports.initialise = function () {
   return util.installHcpPlugin()
-    .then(addHooks);
+    .then(addHooks)
+    .then(updateConfigXml);
 };
 
 /**
@@ -48,6 +51,40 @@ exports.askQuestions = function () {
       }
     });
 };
+
+/**
+ * Add the requierd hot code push elements to the config.xml
+ * @return {Promise}
+ */
+function updateConfigXml () {
+  const CONFIG_PATH = join(process.cwd(), 'config.xml');
+
+  // The config.xml file contents
+  const configString = fs.readFileSync(CONFIG_PATH, 'utf8');
+
+  // A DOM tree represnting the config
+  const configObject = et.parse(configString);
+
+  // The main node in the tree
+  const cordovaConfigTree = configObject.find('./');
+
+  // Create the hcp config element and child url element
+  const rootEl = et.Element('chcp');
+  const cfgFileEl = et.SubElement(rootEl, 'config-file');
+
+  // Set our URL for hcp server
+  cfgFileEl.set('url', cfg.getServerUrl());
+
+  // Need to inject hcp into main config node
+  cordovaConfigTree.append(rootEl);
+
+  // Finally generate the xml string output
+  const newTreeXmlStr = new et.ElementTree(cordovaConfigTree).write({
+    indent: 4
+  });
+
+  fs.writeFileSync(CONFIG_PATH, newTreeXmlStr);
+}
 
 /**
  * Add any required hooks to the project. For now the hook simply ensures the rhmcp.json file is copied into www/
