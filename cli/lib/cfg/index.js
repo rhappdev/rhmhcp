@@ -137,8 +137,8 @@ exports.generateConfig = function (args) {
   debug('generating a new config file from args %j', args);
 
   const settings = Object.assign({}, args, {
-    'create-date': new Date().toISOString(),
-    'rhmhcp-version': require('../../package.json').version
+    'createDate': new Date().toISOString(),
+    'rhmhcpVersion': require('../../package.json').version
   });
 
   set(settings);

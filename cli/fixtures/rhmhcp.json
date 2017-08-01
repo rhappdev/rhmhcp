@@ -4,6 +4,6 @@
   },
   "serverUrl": "http://localhost:8001",
   "type": "cordova",
-  "create-date": "2017-07-31T22:34:42.958Z",
-  "rhmhcp-version": "0.1.0"
+  "createDate": "2017-07-31T22:34:42.958Z",
+  "rhmhcpVersion": "0.1.0"
 }
