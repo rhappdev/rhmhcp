@@ -16,9 +16,6 @@ const LOCATIONS = exports.LOCATIONS = ['local', 'global', 'custom'];
  * Initialise the current Cordova project with Red Hat Mobile Hot Code Push
  */
 exports.initialise = function () {
-  // No point in continuing if this is not a Cordova project
-  util.verifyProjectIsCordova();
-
   return util.installHcpPlugin()
     .then(addHooks);
 };

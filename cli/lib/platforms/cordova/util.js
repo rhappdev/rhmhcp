@@ -13,7 +13,7 @@ const spawnPromise = require('spawn-rx').spawnPromise;
  * @return  {Promise<String>}
  */
 const exec = exports.exec = function exec (args) {
-  log.debug('executing cordova command');
+  log.debug('executing cordova command with args - %s', args.join(', '));
   // Promise.resolve will create a Bluebird promise chain
   return Promise.resolve()
     .then(() => spawnPromise(resolveCordovaLocation(), args));
@@ -56,18 +56,4 @@ exports.installHcpPlugin = function (/* version */) { // TODO versioning
     'cordova-hot-code-push-plugin',
     '--save'
   ]);
-};
-
-
-/**
- * Determine if we're in a Cordova project or not
- */
-exports.verifyProjectIsCordova = function () {
-  log.progress('verifying project is a valid Cordova project');
-  const configPath = path.join(process.cwd(), 'config.xml');
-  const hasConfig = fs.existsSync(configPath);
-
-  if (!hasConfig) {
-    throw new Error('Unable to locate config.xml in current directory. Is this a Cordova project?');
-  };
 };
