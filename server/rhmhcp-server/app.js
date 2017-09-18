@@ -27,8 +27,13 @@ function startServer() {
     swaggerExpress.register(app);
     // app.use(swaggerExpress.runner.swaggerTools.swaggerUi());
     var port = process.env.PORT || 10010;
-    app.listen(port);
-    log.info("Server has started fully.");
+    app.listen(port, (err) => {
+      if (err) {
+        throw err;
+      }
+
+      log.info(`server started and is listening on ${port}`);
+    });
   });
 }
 

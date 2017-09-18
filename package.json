@@ -16,7 +16,7 @@
     "push"
   ],
   "author": "Keyang Xiang <keyang.xiang@gmail.com>",
-  "license": "MIT",
+  "license": "SEE LICENSE in LICENSE",
   "bugs": {
     "url": "https://github.com/redhat-mobile-consulting/rhmhcp/issues"
   },
@@ -24,9 +24,7 @@
   "engines": {
     "node": ">=4.4.3"
   },
-  "dependencies": {
-
-  },
+  "dependencies": {},
   "devDependencies": {
     "eslint": "~4.3.0"
   }

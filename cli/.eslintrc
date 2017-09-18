@@ -34,7 +34,6 @@
     "no-warning-comments": "off",
     "object-curly-spacing": "off",
     "quotes": ["error", "single"],
-    "semi": ["error", "always"],
     "keyword-spacing": ["error", { "after": true }],
     "space-infix-ops": "error",
     "strict": "error",
